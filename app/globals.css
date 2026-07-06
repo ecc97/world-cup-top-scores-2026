@@ -1,26 +1,279 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gold: #f5c542;
+  --gold-dark: #b8860b;
+  --silver: #c0c0c0;
+  --bronze: #cd7f32;
+  --accent: #00ff88;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background: #05060a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: var(--font-bebas-neue), Impact, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Fondo animado */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.bg-glow {
+  background: radial-gradient(ellipse at top, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(245, 197, 66, 0.05) 0%, transparent 50%);
+}
+
+/* Card Scorer */
+.scorer-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.scorer-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(0, 255, 136, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.scorer-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 136, 0.4);
+  box-shadow: 0 20px 40px -10px rgba(0, 255, 136, 0.2), 0 0 0 1px rgba(0, 255, 136, 0.2);
+}
+
+.scorer-card:hover::before {
+  opacity: 1;
+}
+
+/* Player Card FIFA Style */
+.player-card {
+  position: relative;
+  width: 320px;
+  height: 500px;
+  background: linear-gradient(160deg, #1a1f2e 0%, #0a0e1a 50%, #1a1510 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -10px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(245, 197, 66, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.player-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(245, 197, 66, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 70% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.player-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.05) 50%, transparent 60%);
+  pointer-events: none;
+  animation: shine 4s infinite;
+}
+
+@keyframes shine {
+
+  0%,
+  100% {
+    transform: translateX(-100%);
+  }
+
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+.card-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(245, 197, 66, 0.02) 10px, rgba(245, 197, 66, 0.02) 11px);
+  pointer-events: none;
+}
+
+/* Modal */
+.modal-backdrop {
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Ranking badges */
+.rank-1 {
+  background: linear-gradient(135deg, #f5c542 0%, #b8860b 100%);
+  box-shadow: 0 0 20px rgba(245, 197, 66, 0.5);
+}
+
+.rank-2 {
+  background: linear-gradient(135deg, #e0e0e0 0%, #808080 100%);
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.4);
+}
+
+.rank-3 {
+  background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+  box-shadow: 0 0 15px rgba(205, 127, 50, 0.4);
+}
+
+/* Stat bar */
+.stat-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff88 0%, #00cc6a 100%);
+  border-radius: 3px;
+  animation: fillBar 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: left;
+}
+
+@keyframes fillBar {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Pulse dot */
+.pulse-dot {
+  position: relative;
+}
+
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 136, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 136, 0.5);
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 100%);
+  background-size: 200% 100%;
+  animation: skeleton 1.5s infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Fade in up */
+.fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
