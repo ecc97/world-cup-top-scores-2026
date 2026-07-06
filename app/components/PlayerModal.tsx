@@ -76,7 +76,6 @@ export function PlayerModal({ player, onClose }: PlayerModalProps) {
                                 width={40}
                                 height={40}
                                 className="rounded-full border border-black/10"
-                                unoptimized
                             />
                             <div>
                                 <h2 className="font-display text-3xl text-white leading-tight">{player.name}</h2>

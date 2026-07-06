@@ -52,7 +52,6 @@ export function ScorerCard({ player, rank, maxGoals, onClick }: ScorerCardProps)
                             height={48}
                             className="relative z-10 object-contain p-1.5"
                             onError={() => setCrestFailed(true)}
-                            unoptimized
                         />
                     ) : (
                         <span className="relative z-10">{player.initials}</span>

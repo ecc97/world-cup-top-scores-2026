@@ -58,7 +58,6 @@ export function PlayerCard({ player, ratings }: PlayerCardProps) {
                             height={100}
                             className="relative z-10 object-contain p-4"
                             onError={() => setCrestFailed(true)}
-                            unoptimized
                         />
                     ) : (
                         <span className="relative z-10">{player.initials}</span>
