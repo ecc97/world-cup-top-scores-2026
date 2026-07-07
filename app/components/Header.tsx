@@ -1,10 +1,26 @@
 export function Header() {
+
+    const today = new Date();
+
+    const worldCupEnd = new Date(2026, 6, 20);
+
+    const isFinished = today >= worldCupEnd;
+
     return (
         <header className="relative pt-12 pb-8 px-6 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 fade-in-up">
-                <span className="w-2 h-2 rounded-full bg-green-400 pulse-dot text-green-400"></span>
-                <span className="text-xs font-semibold tracking-wider text-green-400 uppercase">
-                    En vivo · Mundial 2026
+                <span
+                    className={`w-2 h-2 rounded-full pulse-dot ${isFinished ? "bg-gray-400 text-gray-400" : "bg-green-400 text-green-400"
+                        }`}
+                ></span>
+
+                <span
+                    className={`text-xs font-semibold tracking-wider uppercase ${isFinished ? "text-gray-400" : "text-green-400"
+                        }`}
+                >
+                    {isFinished
+                        ? "Mundial Finalizado"
+                        : "En vivo · Mundial 2026"}
                 </span>
             </div>
             <h1
